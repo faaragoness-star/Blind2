@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/snapshot.schema.json",
+  "title": "BLIND Snapshot",
+  "type": "object",
+  "required": [
+    "id",
+    "schema_version",
+    "piezas"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(snap|ver):[A-Za-z0-9:._-]+$"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^v\\d+(\\.\\d+)?$"
+    },
+    "piezas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "materiales"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(frame|temple|lentes)$"
+          },
+          "materiales": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "modelos",
+                "colores",
+                "texturas",
+                "acabados"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "modelos": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "colores": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "texturas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "acabados": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "defaults": {
+            "type": "object",
+            "properties": {
+              "material": {
+                "type": "string"
+              },
+              "modelo": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string"
+              },
+              "textura": {
+                "type": "string",
+                "nullable": true
+              },
+              "acabado": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
