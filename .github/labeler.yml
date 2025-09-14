@@ -1,16 +1,35 @@
-# Auto-etiquetar PRs según rutas tocadas
-Capa:WP-Plugin:
-  - 'apps/wp-plugin/**'
-Capa:Viewer:
-  - 'apps/viewer/**'
-Capa:Schemas:
-  - 'packages/schemas/**'
-Capa:Assets:
-  - 'assets/**'
-  - 'tools/assets-lint/**'
-Capa:Docs:
-  - 'docs/**'
-Capa:CI:
-  - '.github/workflows/**'
-Tipo:CI:
-  - '.github/workflows/**'
+"Capa:WP-Plugin":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "apps/wp-plugin/**"
+
+"Capa:Viewer":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "apps/viewer/**"
+
+"Capa:Schemas":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/schemas/**"
+
+"Capa:Assets":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "assets/**"
+          - "tools/assets-lint/**"
+
+"Capa:Docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/**"
+
+"Capa:CI":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+
+"Tipo:CI":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
