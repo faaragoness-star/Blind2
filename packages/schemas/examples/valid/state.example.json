@@ -1,0 +1,36 @@
+{
+  "piezas": [
+    {
+      "id": "frame",
+      "material": "acetato",
+      "modelo": "M1",
+      "color": "NEGRO",
+      "textura": null,
+      "acabado": "MATE"
+    },
+    {
+      "id": "temple",
+      "material": "acetato",
+      "modelo": "P1-L",
+      "color": "NEGRO",
+      "textura": null,
+      "acabado": "MATE"
+    },
+    {
+      "id": "temple",
+      "material": "acetato",
+      "modelo": "P1-R",
+      "color": "NEGRO",
+      "textura": null,
+      "acabado": "MATE"
+    },
+    {
+      "id": "lentes",
+      "material": "clear",
+      "modelo": "LN_CLEAR",
+      "color": "CLEAR",
+      "textura": null,
+      "acabado": "STD"
+    }
+  ]
+}

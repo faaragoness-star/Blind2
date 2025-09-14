@@ -1,0 +1,15 @@
+{
+  "name": "blind-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:schemas": "node scripts/verify-snapshot.mjs",
+    "test:e2e": "node scripts/e2e/validate-signature.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "glob": "^11.0.0"
+  }
+}

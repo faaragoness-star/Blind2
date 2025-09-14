@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentación (Capas 0–5)
+    url: ./docs/CAPAS-INDEX.md
+    about: Revisa el contrato del proyecto antes de crear issues
