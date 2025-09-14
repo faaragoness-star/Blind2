@@ -6,22 +6,24 @@ on:
       - .github/labels.yml
       - .github/workflows/sync-labels.yml
 
-# Permisos por defecto del workflow
 permissions:
   contents: read
 
 jobs:
   labels:
     runs-on: ubuntu-latest
-    # Permisos necesarios para crear/actualizar etiquetas
     permissions:
+      contents: read
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout current repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1            # ← sin "repository:" (usa este repo)
       - name: Sync labels
         uses: crazy-max/ghaction-github-labeler@v5
         with:
-          yaml-file: .github/labels.yml   # ← nombre correcto del input
+          yaml-file: .github/labels.yml  # ← input correcto
           dry-run: false
-          skip-delete: true               # no borra etiquetas existentes
+          skip-delete: true
