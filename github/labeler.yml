@@ -1,0 +1,16 @@
+# Auto-etiquetar PRs según rutas tocadas
+Capa:WP-Plugin:
+  - 'apps/wp-plugin/**'
+Capa:Viewer:
+  - 'apps/viewer/**'
+Capa:Schemas:
+  - 'packages/schemas/**'
+Capa:Assets:
+  - 'assets/**'
+  - 'tools/assets-lint/**'
+Capa:Docs:
+  - 'docs/**'
+Capa:CI:
+  - '.github/workflows/**'
+Tipo:CI:
+  - '.github/workflows/**'
