@@ -1,0 +1,14 @@
+name: CI · Assets
+on:
+  workflow_dispatch:
+  push: { paths: [ 'tools/assets-lint/**', 'assets/**', 'package.json' ] }
+  pull_request: { paths: [ 'tools/assets-lint/**', 'assets/**', 'package.json' ] }
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: node tools/assets-lint/lint.mjs assets
