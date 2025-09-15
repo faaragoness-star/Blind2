@@ -29,3 +29,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ env.ZIP_PATH }}
+
+
+on:
+  workflow_dispatch:
+  release: { types: [published] }
