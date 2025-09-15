@@ -102,3 +102,5 @@ function api_verify(\WP_REST_Request $request){
   $ok = hash_equals($calc, $provided);
   return new \WP_REST_Response(['ok' => $ok], $ok ? 200 : 400);
 }
+
+
