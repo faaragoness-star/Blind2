@@ -1,0 +1,20 @@
+name: CI · PHPStan
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Download PHPStan (phar)
+        run: |
+          curl -sL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
+      - name: Run PHPStan
+        run: |
+          php phpstan.phar analyse apps/wp-plugin/G3D-Flow-Orchestrator --no-progress --level=5
