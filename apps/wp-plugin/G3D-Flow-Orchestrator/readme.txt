@@ -17,3 +17,5 @@ POST /wp-json/g3d/v1/verify
 
 
 chore: trigger ci (creo que es para borrar esta linea)
+
+Esta linea creo que es para borrar
