@@ -2,23 +2,31 @@ name: Release · WP plugin artifact
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag (e.g., v0.1.1)'
+        required: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   package-plugin:
-    name: Package WP plugin and upload to release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # para subir el asset a la release
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve tag (manual or from release)
+        run: |
+          if [ -n "${{ github.event.release.tag_name }}" ]; then
+            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG=${{ inputs.tag }}" >> $GITHUB_ENV
+          fi
+
       - name: Create plugin zip
         run: |
-          set -e
-          TAG="${GITHUB_REF_NAME}"              # p.ej. v0.1.0
           PLUGDIR="apps/wp-plugin/G3D-Flow-Orchestrator"
           OUT="g3d-flow-orchestrator-${TAG}.zip"
           cd "$PLUGDIR/.."
@@ -28,9 +36,5 @@ jobs:
       - name: Upload zip to release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ env.TAG }}
           files: ${{ env.ZIP_PATH }}
-
-
-on:
-  workflow_dispatch:
-  release: { types: [published] }
