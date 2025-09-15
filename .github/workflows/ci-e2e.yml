@@ -1,0 +1,14 @@
+name: CI · E2E
+on:
+  workflow_dispatch:
+  push: { paths: [ 'scripts/e2e/**', 'packages/schemas/examples/valid/**', 'package.json' ] }
+  pull_request: { paths: [ 'scripts/e2e/**', 'packages/schemas/examples/valid/**', 'package.json' ] }
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npm run test:e2e
