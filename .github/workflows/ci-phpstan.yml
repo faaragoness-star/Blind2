@@ -1,0 +1,31 @@
+name: CI · PHPStan
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      # (Opcional pero recomendable) cachea PHPStan para acelerar
+      - name: Cache PHPStan
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('phpstan.neon') }}
+          restore-keys: |
+            ${{ runner.os }}-phpstan-
+
+      - name: Download PHPStan (phar)
+        run: curl -sL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
+
+      - name: Run PHPStan with config
+        run: php phpstan.phar analyse -c phpstan.neon --no-progress --memory-limit=1G

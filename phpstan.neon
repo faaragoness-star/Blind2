@@ -1,0 +1,25 @@
+# phpstan.neon (raíz)
+parameters:
+  level: 0
+
+  paths:
+    - apps/wp-plugin/G3D-Flow-Orchestrator
+
+  excludePaths:
+    - */vendor/*
+    - */node_modules/*
+
+  ignoreErrors:
+    # Funciones globales de WP
+    - '#Call to unknown function (add_action|add_filter|do_action|apply_filters|get_option|update_option|register_post_type|register_taxonomy|wp_[a-z_]+)#'
+    # I18n
+    - '#Call to unknown function (__|_e|_x|_n|_nx|_ex)#'
+    # Utils frecuentes
+    - '#Call to unknown function (plugin_dir_(path|url)|admin_url|site_url|get_transient|set_transient|delete_transient)#'
+    # $wpdb y clases WP/WC
+    - '#Access to an undefined property \$wpdb#'
+    - '#Undefined variable: \$wpdb#'
+    - '#Class (WP|WC)_[A-Za-z0-9_\\\\]+ not found#'
+
+  reportUnmatchedIgnoredErrors: false
+
