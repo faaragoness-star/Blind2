@@ -1,31 +1,29 @@
 name: CI · PHPStan
 on:
   pull_request:
+    paths: ['apps/wp-plugin/**']
   push:
     branches: [main]
+    paths: ['apps/wp-plugin/**']
 
 jobs:
   phpstan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          coverage: none
+        with: { php-version: '8.2' }
 
-      # (Opcional pero recomendable) cachea PHPStan para acelerar
-      - name: Cache PHPStan
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/phpstan
-          key: ${{ runner.os }}-phpstan-${{ hashFiles('phpstan.neon') }}
-          restore-keys: |
-            ${{ runner.os }}-phpstan-
+      - name: Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          composer --version
 
-      - name: Download PHPStan (phar)
-        run: curl -sL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
+      - name: Install dev deps
+        working-directory: apps/wp-plugin/G3D-Flow-Orchestrator
+        run: composer install --no-interaction --no-progress
 
-      - name: Run PHPStan with config
-        run: php phpstan.phar analyse -c phpstan.neon --no-progress --memory-limit=1G
+      - name: Run PHPStan
+        working-directory: apps/wp-plugin/G3D-Flow-Orchestrator
+        run: vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=1G

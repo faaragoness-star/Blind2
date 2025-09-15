@@ -1,0 +1,13 @@
+includes:
+  - vendor/szepeviktor/phpstan-wordpress/extension.neon
+  - vendor/szepeviktor/phpstan-wordpress/rules.neon
+
+parameters:
+  level: 5
+  paths:
+    - .
+  bootstrapFiles:
+    - vendor/autoload.php
+  excludePaths:
+    - */vendor/*
+
