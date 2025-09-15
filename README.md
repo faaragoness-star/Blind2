@@ -1,6 +1,6 @@
 # BLIND — Monorepo
 
-Monorepo inicial para el proyecto **BLIND** (configurador 3D + WordPress).  
+Monorepo inicial para el proyecto **BLIND** (configurador 3D + WordPress)..
 Incluye esqueleto de **plugin**, **viewer/bridge**, **schemas**, **fixtures**, **scripts** y **CI** listos para empezar.
 
 > ⚠️ Este repo es una **plantilla**; ajusta rutas, claves y detalles antes de desplegar.
