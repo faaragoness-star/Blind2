@@ -1,7 +1,0 @@
-# .github/workflows/ci-phpstan.yml (fragmento)
-- name: Install dev deps
-  working-directory: apps/wp-plugin/G3D-Flow-Orchestrator
-  run: |
-    composer config --no-plugins allow-plugins.phpstan/extension-installer true
-    composer update --no-interaction --no-progress
-    composer show -D
