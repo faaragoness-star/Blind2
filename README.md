@@ -1,3 +1,10 @@
+
+![CI · Schemas](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-schemas.yml/badge.svg)
+![CI · E2E](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-e2e.yml/badge.svg)
+![CI · PHP](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-php.yml/badge.svg)
+![CI · Assets](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-assets.yml/badge.svg)
+
+
 # BLIND — Monorepo
 
 Monorepo inicial para el proyecto **BLIND** (configurador 3D + WordPress)..
