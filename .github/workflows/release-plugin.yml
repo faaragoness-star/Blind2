@@ -1,0 +1,36 @@
+name: Release · WP plugin artifact
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  package-plugin:
+    name: Package WP plugin and upload to release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # para subir el asset a la release
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create plugin zip
+        run: |
+          set -e
+          TAG="${GITHUB_REF_NAME}"              # p.ej. v0.1.0
+          PLUGDIR="apps/wp-plugin/G3D-Flow-Orchestrator"
+          OUT="g3d-flow-orchestrator-${TAG}.zip"
+          cd "$PLUGDIR/.."
+          zip -r "../../../$OUT" "G3D-Flow-Orchestrator" -x "**/.git/**"
+          echo "ZIP_PATH=$OUT" >> $GITHUB_ENV
+
+      - name: Upload zip to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.ZIP_PATH }}
+
+
+on:
+  workflow_dispatch:
+  release: { types: [published] }
