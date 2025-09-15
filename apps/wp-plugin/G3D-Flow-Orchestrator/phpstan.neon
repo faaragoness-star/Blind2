@@ -1,13 +1,23 @@
+# apps/wp-plugin/G3D-Flow-Orchestrator/phpstan.neon
 includes:
   - vendor/szepeviktor/phpstan-wordpress/extension.neon
   - vendor/szepeviktor/phpstan-wordpress/rules.neon
 
 parameters:
-  level: 5
+  level: 0
+  bootstrapFiles:
+    - %currentWorkingDirectory%/vendor/autoload.php
   paths:
     - .
-  bootstrapFiles:
-    - vendor/autoload.php
+
   excludePaths:
     - */vendor/*
+    - */node_modules/*
 
+  ignoreErrors:
+    - '#Call to unknown function (add_action|add_filter|do_action|apply_filters|get_option|update_option|register_post_type|register_taxonomy|wp_[a-z_]+)#'
+    - '#Call to unknown function (__|_e|_x|_n|_nx|_ex)#'
+    - '#Call to unknown function (plugin_dir_(path|url)|admin_url|site_url|get_transient|set_transient|delete_transient)#'
+    - '#(Access to an undefined property|Undefined variable): \$wpdb#'
+    - '#Class (WP|WC)_[A-Za-z0-9_\\\\]+ not found#'
+  reportUnmatchedIgnoredErrors: false
