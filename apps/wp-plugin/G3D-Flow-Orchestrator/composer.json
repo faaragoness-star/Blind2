@@ -8,3 +8,10 @@
     "php-stubs/wordpress-stubs": "^6.5"
   }
 }
+{
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  }
+}
