@@ -5,5 +5,3 @@
     composer config --no-plugins allow-plugins.phpstan/extension-installer true
     composer update --no-interaction --no-progress
     composer show -D
-
-
