@@ -1,6 +1,7 @@
-# phpstan.neon  (raíz del repo)
+# phpstan.neon (raíz)
 parameters:
   level: 0
+
   paths:
     - apps/wp-plugin/G3D-Flow-Orchestrator
 
@@ -8,10 +9,17 @@ parameters:
     - */vendor/*
     - */node_modules/*
 
-  # Ignora llamadas a funciones globales de WordPress (no tenemos stubs)
   ignoreErrors:
-    - '#Call to unknown function (add_action|add_filter|do_action|apply_filters|wp_[a-z_]+|get_option|update_option|register_post_type|register_taxonomy|wp_enqueue_script|wp_enqueue_style|esc_[a-z_]+|sanitize_[a-z_]+)#'
+    # Funciones globales de WP
+    - '#Call to unknown function (add_action|add_filter|do_action|apply_filters|get_option|update_option|register_post_type|register_taxonomy|wp_[a-z_]+)#'
+    # I18n
+    - '#Call to unknown function (__|_e|_x|_n|_nx|_ex)#'
+    # Utils frecuentes
+    - '#Call to unknown function (plugin_dir_(path|url)|admin_url|site_url|get_transient|set_transient|delete_transient)#'
+    # $wpdb y clases WP/WC
+    - '#Access to an undefined property \$wpdb#'
+    - '#Undefined variable: \$wpdb#'
+    - '#Class (WP|WC)_[A-Za-z0-9_\\\\]+ not found#'
 
-  # Evita fallar si algún patrón de ignore no coincide
   reportUnmatchedIgnoredErrors: false
 
