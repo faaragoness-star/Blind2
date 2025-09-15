@@ -1,13 +1,8 @@
 name: CI · PHPStan
-
 on:
-  workflow_dispatch:
   pull_request:
   push:
     branches: [main]
-
-permissions:
-  contents: read
 
 jobs:
   phpstan:
@@ -19,31 +14,18 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
-          extensions: json, mbstring
 
-      # Si no hay phpstan.neon en el repo, crea uno razonable para WP
-      - name: Prepare phpstan config (if missing)
-        run: |
-          if [ ! -f phpstan.neon ]; then
-            cat > phpstan.neon <<'NEON'
-            parameters:
-              level: 0
-              paths:
-                - apps/wp-plugin/G3D-Flow-Orchestrator
-              excludePaths:
-                - */vendor/*
-                - */node_modules/*
-              ignoreErrors:
-                - '#Call to unknown function (add_action|add_filter|register_post_type|wp_enqueue_script)#'
-            NEON
-          fi
+      # (Opcional pero recomendable) cachea PHPStan para acelerar
+      - name: Cache PHPStan
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('phpstan.neon') }}
+          restore-keys: |
+            ${{ runner.os }}-phpstan-
 
       - name: Download PHPStan (phar)
         run: curl -sL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
 
-      - name: Run PHPStan
+      - name: Run PHPStan with config
         run: php phpstan.phar analyse -c phpstan.neon --no-progress --memory-limit=1G
-
-    
- 
-
