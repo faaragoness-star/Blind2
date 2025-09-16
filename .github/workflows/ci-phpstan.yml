@@ -1,4 +1,5 @@
 name: CI · PHPStan
+
 on:
   pull_request: {}
   push:
@@ -9,15 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           tools: composer:v2
+
       - name: Install dev deps
         working-directory: apps/wp-plugin/G3D-Flow-Orchestrator
         run: |
           composer config --no-plugins allow-plugins.phpstan/extension-installer true
           composer update --no-interaction --no-progress
-      - name: Run PHPStan
+
+      - name: Run PHPStan (use root config)
         working-directory: apps/wp-plugin/G3D-Flow-Orchestrator
-        run: vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=1G
+        run: vendor/bin/phpstan analyse -c ../../../phpstan.neon --no-progress --memory-limit=1G
