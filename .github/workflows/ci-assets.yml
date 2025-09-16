@@ -1,7 +1,7 @@
 name: CI · Assets
 
 on:
-  pull_request: {}          # corre en cualquier PR (evita "Expected")
+  pull_request:
   push:
     branches: [main]
   workflow_dispatch:
@@ -9,26 +9,28 @@ on:
 jobs:
   assets:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            **/package-lock.json
 
       - name: Show versions
         run: node -v && npm -v
 
+      - name: Harden npm config
+        run: |
+          npm config set fetch-retries 5
+          npm config set fetch-timeout 120000
+
       - name: Install deps (lock optional)
         run: |
           if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund
+            npm ci --no-audit --no-fund --no-optional
           else
-            npm install --no-audit --no-fund
+            npm install --no-audit --no-fund --no-optional
           fi
 
       - name: Lint assets
