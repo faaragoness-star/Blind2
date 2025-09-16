@@ -1,0 +1,24 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+change-template: '- $TITLE (#$NUMBER) — @$AUTHOR'
+categories:
+  - title: 🚀 Features
+    labels: [feat]
+  - title: 🐞 Fixes
+    labels: [fix]
+  - title: 🧰 Chores
+    labels: [chore, build, ci, docs, refactor, test, perf]
+template: |
+  ## Cambios
+  $CHANGES
+
+  ## Notas
+  - Release generado automáticamente.
+version-resolver:
+  major:
+    labels: [major]
+  minor:
+    labels: [feat, minor]
+  patch:
+    labels: [fix, chore, docs, ci, test, perf, refactor, build, patch]
+  default: patch
