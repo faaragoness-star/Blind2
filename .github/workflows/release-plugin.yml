@@ -1,4 +1,5 @@
 name: Release · WP plugin artifact
+
 on:
   release:
     types: [published]
@@ -16,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # opcional, pero recomendado
 
       - name: Resolve tag (manual or from release)
         run: |
@@ -30,11 +33,14 @@ jobs:
           PLUGDIR="apps/wp-plugin/G3D-Flow-Orchestrator"
           OUT="g3d-flow-orchestrator-${TAG}.zip"
           cd "$PLUGDIR/.."
-          zip -r "../../../$OUT" "G3D-Flow-Orchestrator" -x "**/.git/**"
-          echo "ZIP_PATH=$OUT" >> $GITHUB_ENV
+          # crea el zip en la RAÍZ del repo
+          zip -r "$GITHUB_WORKSPACE/$OUT" "G3D-Flow-Orchestrator" -x "**/.git/**"
+          echo "ZIP_PATH=$GITHUB_WORKSPACE/$OUT" >> $GITHUB_ENV
 
       - name: Upload zip to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.TAG }}
           files: ${{ env.ZIP_PATH }}
+          fail_on_unmatched_files: true
+
