@@ -1,4 +1,13 @@
 
+## CI Status
+![Assets](https://github.com/OWNER/REPO/actions/workflows/ci-assets.yml/badge.svg)
+![E2E](https://github.com/OWNER/REPO/actions/workflows/ci-e2e.yml/badge.svg)
+![Schemas](https://github.com/OWNER/REPO/actions/workflows/ci-schemas.yml/badge.svg)
+![PHP Lint](https://github.com/OWNER/REPO/actions/workflows/ci-php.yml/badge.svg)
+![Release](https://github.com/OWNER/REPO/actions/workflows/release-plugin.yml/badge.svg)
+
+
+
 ![CI · Schemas](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-schemas.yml/badge.svg)
 ![CI · E2E](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-e2e.yml/badge.svg)
 ![CI · PHP](https://github.com/faaragoness-star/Blind2/actions/workflows/ci-php.yml/badge.svg)
