@@ -2,7 +2,7 @@
 /**
  * Plugin Name: G3D Flow Orchestrator
  * Description: UI Flow + Endpoints + Shortcode para el visor 3D.
- * Version: 3.4.0
+ * Version: 0.1.4
  * Author: BLIND
  * License: MIT
  */
