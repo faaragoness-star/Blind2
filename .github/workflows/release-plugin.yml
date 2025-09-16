@@ -24,6 +24,7 @@ jobs:
           else
             echo "TAG=${{ inputs.tag }}" >> $GITHUB_ENV
           fi
+          echo "Using tag: $TAG"
 
       - name: Create plugin zip
         run: |
